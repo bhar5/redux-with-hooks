@@ -1,12 +1,12 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux'
 import './App.css';
 import allActions from './actions'
 
-
 const App = () => {
   const counter = useSelector(state => state.counter)
   const currentUser = useSelector(state => state.currentUser)
+  const [msg, setMsg] = useState('Hello');
 
   const dispatch = useDispatch()
 
@@ -21,13 +21,13 @@ const App = () => {
       {
         currentUser.loggedIn ?
           <>
-            <h1>Hello, {currentUser.user.name}</h1>
+            <h1>{`${msg}, ${currentUser.user.name}`}</h1>
             <button onClick={() => dispatch(allActions.userActions.logOut())}>Logout</button>
           </>
           :
           <>
             <h1>Login</h1>
-            <button onClick={() => dispatch(allActions.userActions.setUser(user))}>Login as Shubham</button>
+            <button onClick={() => dispatch(allActions.userActions.setUser(user))}>{`Login as Shubham`}</button>
           </>
       }
       <h1>Counter: {counter}</h1>

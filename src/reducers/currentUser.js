@@ -1,16 +1,26 @@
-const currentUser = (state = {}, action) => {
+const currentUser = (state, action) => {
+    const initalState = {};
+
+    if (!state) {
+        state = initalState;
+    }
+
     switch (action.type) {
         case "SET_USER":
-            return {
-                ...state,
-                user: action.payload,
-                loggedIn: true
+            {
+                state = Object.assign({}, state, {
+                    user: action.payload,
+                    loggedIn: true
+                })
+                return state;
             }
         case "LOG_OUT":
-            return {
-                ...state,
-                user: {},
-                loggedIn: false
+            {
+                state = Object.assign({}, state, {
+                    user: {},
+                    loggedIn: false
+                })
+                return state;
             }
         default:
             return state
